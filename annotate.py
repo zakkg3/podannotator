@@ -1,3 +1,4 @@
+__version__ = '0.1'
 from kubernetes import client, config
 from kubernetes.client.rest import ApiException
 import sys
