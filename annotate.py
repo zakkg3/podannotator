@@ -50,4 +50,4 @@ for p in table:
         print (" AAHH something went wrong!")
         exit(1)
 exit (0)
-# todo: if a pvc have more than 1 pod, then the las for p int table should handle this.
+# todo: if a pvc have more than 1 pod, then for p int table should handle this.
