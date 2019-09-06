@@ -45,7 +45,7 @@ for p in table:
         v1.patch_namespaced_pod(pod,ns,body)
         print (' Done')
     except ApiException as e:
-        print (" AAHH something went wrong!")
+        print (" something went wrong! -.- ")
         exit(1)
 exit (0)
 # todo: if a pvc have more than 1 pod, then the las for p int table should handle this.
