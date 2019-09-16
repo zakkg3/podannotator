@@ -18,7 +18,7 @@ So now you can backup the namespace with velero/restic and this pvc will be back
 
 ```
 python3 annotate.py gitlab
-YPods with Persistant Volume Cliams to be annotated:
+Pods with Persistant Volume Cliams to be annotated:
 +-----------+------------------------------------+-------------+---------------------------+
 | Namespace |                Pod                 | Volume-Name |            PVC            |
 +-----------+------------------------------------+-------------+---------------------------+
