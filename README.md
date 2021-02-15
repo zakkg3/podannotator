@@ -61,9 +61,9 @@ A pod_map is a *JSON-like* object which is in the following format:
             'nagios-configs', 
             'nagios-servers', 
             'nagios-last-servers'
-            ]
-        }
+        ]
     }
+}
 ```
 
 The reason for re-mapping the return from the API call is that this makes life much simpler later when we want to tie all volumes to their respective parent pods, otherwise we need to keep looping in and out of the API call repeatedly, which is more requests, and all takes additional time.  If this needs to be extended to include more data, this can be done by extending the get_pod_map method within the Annotate class.
