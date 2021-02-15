@@ -39,6 +39,21 @@ For example, if I issued the following command: python3 annotate.py raffia,logst
 |   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |     None    |
 +-----------+--------------------------+---------------------------+---------------------------+-------------+
 
++-----------+--------------------------+---------------------------+---------------------------+-------------+
+| Namespace |           Pod            |        Volume-Name        |            PVC            | Annotations |
++-----------+--------------------------+---------------------------+---------------------------+-------------+
+|  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 |     None    |
+|  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      |     None    |
+|  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     |     None    |
+|  logstash |     logstashshared-0     |          pipeline         | pipeline-logstashshared-0 |     None    |
+|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |     None    |
+|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |     None    |
+|   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |     None    |
++-----------+--------------------------+---------------------------+---------------------------+-------------+
+
+First Header | Second Header
+------------ | -------------
+
 
 ## Pod Map object
 
