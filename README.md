@@ -85,6 +85,7 @@ A human-readable preview will be shown next.  This is a legacy from a prompt tha
 |   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
 |   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
 |   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
+
 It will annotate all the pods (for the provided namespace(s)) with persist volume claims with the annotation: `backup.velero.io/backup-volumes: volume(s)-name-to-backup`
 
 So now you can backup the namespace with velero/restic and this pvc will be backed up as well. :)
