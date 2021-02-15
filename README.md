@@ -43,6 +43,28 @@ A "pod map" will then be generated based on the kubernetes API call which return
 
 A pod_map is a *JSON-like* object which is in the following format:
 
+```json
+{'logstash': 
+    {
+        'logstash-ccc4d98c9-k89sd': [
+            'pipeline-logstashshared-0', 
+            'logstash-1-data', 
+            'logstash-1-config'
+        ], 
+        'logstashshared-0': [
+            'pipeline'
+        ]
+    }, 
+    'nagios': 
+        {
+            'nagios-7f6f997894-dxt5n': [
+            'nagios-configs', 
+            'nagios-servers', 
+            'nagios-last-servers'
+            ]
+        }
+    }```
+
 {'logstash': {'logstash-ccc4d98c9-k89sd': ['pipeline-logstashshared-0', 'logstash-1-data', 'logstash-1-config'], 'logstashshared-0': ['pipeline']}, 'nagios': {'nagios-7f6f997894-dxt5n': ['nagios-configs', 'nagios-servers', 'nagios-last-servers']}}
 
 The reason for re-mapping the return from the API call is that this makes life much simpler later when we want to tie all volumes to their respective parent pods, otherwise we need to keep looping in and out of the API call repeatedly, which is more requests, and all takes additional time.  If this needs to be extended to include more data, this can be done by extending the get_pod_map method within the Annotate class.
@@ -54,18 +76,6 @@ A human-readable preview will be shown next.  This is a legacy from a prompt tha
 
 
 ## Final position display
-
-+-----------+--------------------------+---------------------------+---------------------------+----------------------------------------------------------------------------------------------------+
-| Namespace |           Pod            |        Volume-Name        |            PVC            |                                            Annotations                                             |
-+-----------+--------------------------+---------------------------+---------------------------+----------------------------------------------------------------------------------------------------+
-|  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
-|  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
-|  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
-|  logstash |     logstashshared-0     |          pipeline         | pipeline-logstashshared-0 |                          {'backup.velero.io/backup-volumes': 'pipeline'}                           |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
-|   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
-+-----------+--------------------------+---------------------------+---------------------------+----------------------------------------------------------------------------------------------------+
 
 | Namespace | Pod                      | Volume-Name               | PVC                       | Annotations |
 |---------- | ------------------------ | ------------------------- | ------------------------- | ----------- |
