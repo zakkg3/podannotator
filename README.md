@@ -27,32 +27,8 @@ Initially, a table will be created showing the start position of all of the volu
 
 For example, if I issued the following command: python3 annotate.py raffia,logstash,vault,nagios
 
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-| Namespace |           Pod            |        Volume-Name        |            PVC            | Annotations |
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-|  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 |     None    |
-|  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      |     None    |
-|  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     |     None    |
-|  logstash |     logstashshared-0     |          pipeline         | pipeline-logstashshared-0 |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |     None    |
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-| Namespace |           Pod            |        Volume-Name        |            PVC            | Annotations |
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-|  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 |     None    |
-|  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      |     None    |
-|  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     |     None    |
-|  logstash |     logstashshared-0     |          pipeline         | pipeline-logstashshared-0 |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |     None    |
-|   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |     None    |
-+-----------+--------------------------+---------------------------+---------------------------+-------------+
-
-| Namespace | Pod           | Volume-Name     | PVC           | Annotations |
-|---------- | ------------- | --------------- | ------------- | ----------- |
+| Namespace | Pod                      | Volume-Name               | PVC                       | Annotations |
+|---------- | ------------------------ | ------------------------- | ------------------------- | ----------- |
 |  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 |     None    |
 |  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      |     None    |
 |  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     |     None    |
@@ -91,6 +67,15 @@ A human-readable preview will be shown next.  This is a legacy from a prompt tha
 |   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
 +-----------+--------------------------+---------------------------+---------------------------+----------------------------------------------------------------------------------------------------+
 
+| Namespace | Pod                      | Volume-Name               | PVC                       | Annotations |
+|---------- | ------------------------ | ------------------------- | ------------------------- | ----------- |
+|  logstash | logstash-ccc4d98c9-k89sd | pipeline-logstashshared-0 | pipeline-logstashshared-0 | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
+|  logstash | logstash-ccc4d98c9-k89sd |      logstash-1-data      |      logstash-1-data      | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
+|  logstash | logstash-ccc4d98c9-k89sd |     logstash-1-config     |     logstash-1-config     | {'backup.velero.io/backup-volumes': 'pipeline-logstashshared-0,logstash-1-data,logstash-1-config'} |
+|  logstash |     logstashshared-0     |          pipeline         | pipeline-logstashshared-0 |                          {'backup.velero.io/backup-volumes': 'pipeline'}                           |
+|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-configs      |       nagios-configs      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
+|   nagios  | nagios-7f6f997894-dxt5n  |       nagios-servers      |       nagios-servers      |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
+|   nagios  | nagios-7f6f997894-dxt5n  |    nagios-last-servers    |    nagios-last-servers    |      {'backup.velero.io/backup-volumes': 'nagios-configs,nagios-servers,nagios-last-servers'}      |
 It will annotate all the pods (for the provided namespace(s)) with persist volume claims with the annotation: `backup.velero.io/backup-volumes: volume(s)-name-to-backup`
 
 So now you can backup the namespace with velero/restic and this pvc will be backed up as well. :)
