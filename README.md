@@ -1,15 +1,15 @@
 # podannotator
 Annotates all volumes (with a PVC), in all pods, in a given list of namepsaces to be backed up by velero/restic.
 
-Namespace 1
-    -- Pod 1
-        -- Volume 1 (N1P1V1)
-        -- Volume 2 (N1P1V2)
-    -- Pod 2
-        -- Volume 1 (N1P2V1)
-        -- Volume 2 (N1P2V2)
-Namespace 2
-    -- Etc.
+* Namespace 1
+  * Pod 1
+    * Volume 1 (N1P1V1)
+    * Volume 2 (N1P1V2)
+  * Pod 2
+    * Volume 1 (N1P2V1)
+    * Volume 2 (N1P2V2)
+* Namespace 2
+  * Etc.
 
 Note: All pods within a given namespace will be backed up, if they have a PVC.  (Ignoring PVC's would include secrets.)  There is currently no requirement to be able to exclude volumes from backups.  See @todo in class if this is ever in scope.
 
